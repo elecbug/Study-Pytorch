@@ -30,8 +30,8 @@ net = resnet18(pretrained=True)
 num_ftrs = net.fc.in_features
 net.fc = nn.Linear(num_ftrs, 100)  # Modify the final layer to have 100 output classes
 
-device = "cuda"
-net = net.to(device)
+# device = "cuda"
+# net = net.to(device)
 
 # Step 3: Define the Loss Function and Optimizer
 criterion = nn.CrossEntropyLoss()

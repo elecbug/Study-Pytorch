@@ -39,8 +39,8 @@ class SimpleCNN(nn.Module):
 # Step 3: Load the Trained Model
 net = SimpleCNN()
 
-device = "cuda"
-net = net.to(device)
+# device = "cuda"
+# net = net.to(device)
 
 net.load_state_dict(torch.load("cifar100_cnn.pth"))
 
