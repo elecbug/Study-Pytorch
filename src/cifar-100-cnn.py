@@ -52,6 +52,9 @@ class SimpleCNN(nn.Module):
 
 net = SimpleCNN()
 
+device = "cuda"
+net = net.to(device)
+
 # Step 3: Define the Loss Function and Optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(net.parameters(), lr=0.001)
