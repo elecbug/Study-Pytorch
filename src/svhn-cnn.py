@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
+import scipy.io as sio
 from torch.utils.data import DataLoader
 
 # Step 1: Load and Normalize the CIFAR-100 Dataset
@@ -18,11 +19,11 @@ transform_test = transforms.Compose([
     transforms.Normalize((0.5074, 0.4867, 0.4411), (0.2675, 0.2565, 0.2761))
 ])
 
-trainset = torchvision.datasets.CIFAR100(root='./data', train=True, download=True, transform=transform_train)
-trainloader = DataLoader(trainset, batch_size=64, shuffle=True, num_workers=2)
+trainset = torchvision.datasets.SVHN(root='./data', split='train', download=True, transform=transform_train)
+trainloader = DataLoader(trainset, batch_size=64, shuffle=True, num_workers=4)
 
-testset = torchvision.datasets.CIFAR100(root='./data', train=False, download=True, transform=transform_test)
-testloader = DataLoader(testset, batch_size=64, shuffle=False, num_workers=2)
+testset = torchvision.datasets.SVHN(root='./data', split='test', download=True, transform=transform_test)
+testloader = DataLoader(testset, batch_size=64, shuffle=False, num_workers=4)
 
 # Step 2: Define the CNN Model
 class SimpleCNN(nn.Module):
@@ -125,4 +126,4 @@ accuracy = 100 * total_correct / total_samples
 print(f"Average Loss on the Test Set: {average_loss:.4f}")
 print(f"Accuracy on the Test Set: {accuracy:.2f}%")
 
-torch.save(net.state_dict(), 'cifar100_cnn.pth')
+torch.save(net.state_dict(), 'svhn_cnn.pth')
